@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavi-Tech - Smart Solutions for the Visually Impaired</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.8)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #555;
+        }
+        
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Solution Section */
+        .solution {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .solution-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .solution-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .solution-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .features {
+            margin-top: 30px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon {
+            color: var(--success);
+            font-size: 24px;
+            margin-right: 15px;
+            margin-top: 2px;
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px 20px;
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .member-role {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        /* Initiatives Section */
+        .initiatives {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .initiatives-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .initiative {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .initiative-icon {
+            background-color: var(--warning);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .initiative-text h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column p, .footer-column li {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+        
+        .newsletter {
+            display: flex;
+            margin-top: 15px;
+        }
+        
+        .newsletter input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .newsletter button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter button:hover {
+            background-color: #2980b9;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .solution-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .solution-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .btn-outline {
+                display: block;
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">L</div>
+                <h1>Lavi-Tech</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#problem">Problem</a></li>
+                    <li><a href="#solution">Solution</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#initiatives">Initiatives</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Smart Strides for the Visually Impaired</h1>
+            <p>Empowering independence with our innovative smart cane technology that detects obstacles, monitors environmental conditions, and provides real-time guidance.</p>
+            <a href="#solution" class="btn">Learn More</a>
+            <a href="#contact" class="btn btn-outline">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Challenge with Traditional Canes</h2>
+                <p>For decades, visually impaired individuals have relied on traditional white canes with significant limitations.</p>
+            </div>
+            
+            <div class="problem-cards">
+                <div class="card">
+                    <div class="card-icon">⚠️</div>
+                    <h3>Limited Detection</h3>
+                    <p>Traditional canes only detect ground obstacles, missing objects at waist or head level that can cause serious injuries.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">💧</div>
+                    <h3>Environmental Hazards</h3>
+                    <p>Users frequently suffer injuries from wet floors, hot surfaces, and other environmental dangers that canes cannot detect.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🚫</div>
+                    <h3>Physical Barriers</h3>
+                    <p>Canes often get stuck, create physical barriers between users and sighted people, and lack advanced warning systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Innovative Solution</h2>
+                <p>The Lavi-Tech smart cane integrates advanced sensors to provide comprehensive assistance for visually impaired individuals.</p>
+            </div>
+            
+            <div class="solution-content">
+                <div class="solution-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Smart Cane Technology">
+                </div>
+                
+                <div class="solution-text">
+                    <h3>Smart Strides Cane</h3>
+                    <p>Our compact, user-friendly device combines multiple technologies to enhance mobility and safety for visually impaired users.</p>
+                    
+                    <div class="features">
+                        <div class="feature">
+                            <div class="feature-icon">✓</div>
+                            <div>
+                                <h4>Ultrasonic Sensors</h4>
+                                <p>Detects obstacles at all levels - ground, waist, and head height.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon">✓</div>
+                            <div>
+                                <h4>Real-time Audio Alerts</h4>
+                                <p>Built-in buzzer provides immediate warnings about nearby hazards.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon">✓</div>
+                            <div>
+                                <h4>Environmental Monitoring</h4>
+                                <p>Water sensors detect wet surfaces, DHT11 monitors temperature and humidity.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon">✓</div>
+                            <div>
+                                <h4>Compact & User-Friendly</h4>
+                                <p>Lightweight design with intuitive controls for daily independence.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Team</h2>
+                <p>The passionate individuals behind Lavi-Tech's innovative solutions.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Team Member">
+                    </div>
+                    <div class="member-name">Kepha Siya Cherop</div>
+                    <div class="member-role">CEO & Founder</div>
+                    <div class="member-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">t</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Team Member">
+                    </div>
+                    <div class="member-name">Angella Alupo</div>
+                    <div class="member-role">MANAGER</div>
+                    <div class="member-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">t</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Team Member">
+                    </div>
+                    <div class="member-name">Hussein Nejjo</div>
+                    <div class="member-role">Lead Engineer</div>
+                    <div class="member-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">t</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://randomuser.me/api/portraits/women/4.jpg" alt="Team Member">
+                    </div>
+                    <div class="member-name">Mugabane Nicholas</div>
+                    <div class="member-role">ELECTRICAL ENGINEER</div>
+                    <div class="member-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">t</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="Team Member">
+                    </div>
+                    <div class="member-name">Emmanuel Katende</div>
+                    <div class="member-role">ARCHITECT</div>
+                    <div class="member-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">t</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://randomuser.me/api/portraits/women/6.jpg" alt="Team Member">
+                    </div>
+                    <div class="member-name">Daniel Mukisa</div>
+                    <div class="member-role">INCHAARGE TESTING</div>
+                    <div class="member-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">t</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://randomuser.me/api/portraits/men/7.jpg" alt="Team Member">
+                    </div>
+                    <div class="member-name">INNOCENT NUWAGABA</div>
+                    <div class="member-role">PRO</div>
+                    <div class="member-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">t</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Initiatives Section -->
+    <section class="initiatives" id="initiatives">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Strategic Initiatives</h2>
+                <p>We're continuously improving our technology and expanding our capabilities.</p>
+            </div>
+            
+            <div class="initiatives-list">
+                <div class="initiative">
+                    <div class="initiative-icon">🌐</div>
+                    <div class="initiative-text">
+                        <h4>GPS Integration</h4>
+                        <p>Adding GPS technology for enhanced global navigation capabilities.</p>
+                    </div>
+                </div>
+                
+                <div class="initiative">
+                    <div class="initiative-icon">🤖</div>
+                    <div class="initiative-text">
+                        <h4>AI-Powered Features</h4>
+                        <p>Developing AI-driven solutions with voice note tools for improved efficiency.</p>
+                    </div>
+                </div>
+                
+                <div class="initiative">
+                    <div class="initiative-icon">📱</div>
+                    <div class="initiative-text">
+                        <h4>Mobile Application</h4>
+                        <p>Creating a companion app for close monitoring and device management.</p>
+                    </div>
+                </div>
+                
+                <div class="initiative">
+                    <div class="initiative-icon">🔧</div>
+                    <div class="initiative-text">
+                        <h4>Service Centers</h4>
+                        <p>Establishing service centers with skilled technicians for maintenance and repairs.</p>
+                    </div>
+                </div>
+                
+                <div class="initiative">
+                    <div class="initiative-icon">🔍</div>
+                    <div class="initiative-text">
+                        <h4>Product Diversification</h4>
+                        <p>Developing multiple products to meet diverse customer needs.</p>
+                    </div>
+                </div>
+                
+                <div class="initiative">
+                    <div class="initiative-icon">☀️</div>
+                    <div class="initiative-text">
+                        <h4>Solar Power</h4>
+                        <p>Implementing solar charging to reduce costs and promote eco-friendly usage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Lavi-Tech</h3>
+                    <p>Creating smart solutions to empower visually impaired individuals with independence and confidence.</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email">
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#problem">The Problem</a></li>
+                        <li><a href="#solution">Our Solution</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#initiatives">Initiatives</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p>123 Innovation Drive</p>
+                    <p>San Francisco, CA 94107</p>
+                    <p>info@lavitech.com</p>
+                    <p>(415) 555-0123</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="member-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Lavi-Tech. All rights reserved. Making the world smarter and safer for visually impaired individuals.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            if (nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '70px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.backgroundColor = 'white';
+                nav.style.padding = '20px';
+                nav.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = document.querySelector('.newsletter input').value;
+            if (email) {
+                alert('Thank you for subscribing with email: ' + email);
+                document.querySelector('.newsletter input').value = '';
+            } else {
+                alert('Please enter a valid email address');
+            }
+        });
+    </script>
+</body>
+</html>
